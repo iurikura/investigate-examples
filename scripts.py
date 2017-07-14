@@ -4,6 +4,7 @@ from urllib2 import Request, urlopen
 import os, sys
 
 token = os.getenv('INVESTIGATE_TOKEN', False)
+user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
 
 if not token:
   print "ERROR: environment variable \'INVESTIGATE_TOKEN\' not set. Invoke script with \'INVESTIGATE_TOKEN=%YourToken% python scripts.py\'"
@@ -12,7 +13,8 @@ if not token:
 # domains/categorization
 
 headers = {
-  'Authorization': 'Bearer ' + token
+  'Authorization': 'Bearer ' + token,
+  'User-Agent':user_agent,
 }
 request = Request('https://investigate.api.opendns.com/domains/categorization/amazon.com', headers=headers)
 
